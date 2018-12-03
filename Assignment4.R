@@ -188,13 +188,14 @@ mout_2$est.noadj
 # -------------------------------------
 
 BalanceMat <- cbind(foo$wartype, foo$logcost, foo$wardur, foo$factnum, foo$factnum2, foo$trnsfcap, foo$treaty, foo$develop, foo$exp, foo$treaty, foo$develop,foo$decade)
-
 gen5 <- GenMatch(Tr=Tr, X=BalanceMat, estimand = "ATT", M=1,pop.size=200, max.generations = 25, wait.generations = 10)
 
 mgen5 <- Match(Tr=Tr, X=BalanceMat, Y=foo$pbs5l, Weight.matrix=gen5, estimand= "ATT", M=1, BiasAdjust = TRUE)
 summary(mgen5)
 mgen5$est
+# 0.2510604
 mgen5$est.noadj
+# 0.1212121
 mout_gen5 <- MatchBalance(Tr ~ foo$wartype + foo$logcost + foo$wardur + foo$factnum + foo$factnum2 + 
                          foo$trnsfcap  + foo$treaty + foo$develop + foo$exp + foo$decade, 
                          match.out = mgen5, nboots=500)
@@ -204,7 +205,9 @@ gen2 <- GenMatch(Tr=Tr, X=BalanceMat, estimand = "ATT", M=1,pop.size=200, max.ge
 mgen2 <- Match(Tr=Tr, X=BalanceMat, Y=foo$pbs2l, Weight.matrix=gen2, estimand= "ATT", M=1, BiasAdjust = TRUE)
 summary(mgen2)
 mgen2$est
+# 0.2700872
 mgen2$est.noadj
+# 0.1515152
 mout_gen2 <- MatchBalance(Tr ~ foo$wartype + foo$logcost + foo$wardur + foo$factnum + foo$factnum2 + 
                            foo$trnsfcap  + foo$treaty + foo$develop + foo$exp + foo$decade, 
                          match.out = mgen2, nboots=500)
